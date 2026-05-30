@@ -1,0 +1,17 @@
+services:
+    postgres:
+        image: postgres:16-alpine
+        container_name: tg_bot_postgres
+        restart: always
+        environment:
+            POSTGRES_USER: dev_user
+            POSTGRES_PASSWORD: dev_password
+            POSTGRES_DB: tg_subscription_db
+        ports:
+            - '5433:5432'
+        volumes:
+            - tg_bot_data:/var/lib/postgresql/data
+
+volumes:
+    tg_bot_data:
+        driver: local

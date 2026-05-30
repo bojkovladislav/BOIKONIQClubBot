@@ -1,0 +1,54 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id            String         @id @default(uuid())
+  telegramId    BigInt         @unique
+  username      String?
+  firstName     String
+  lastName      String?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  subscriptions Subscription[]
+}
+
+model BookCode {
+  id           String        @id @default(uuid())
+  code         String        @unique
+  status       CodeStatus    @default(UNUSED)
+  createdAt    DateTime      @default(now())
+  activatedAt  DateTime?
+  subscription Subscription?
+}
+
+model Subscription {
+  id         String             @id @default(uuid())
+  userId     String
+  bookCodeId String             @unique
+  status     SubscriptionStatus @default(TRIAL)
+  startDate  DateTime           @default(now())
+  endDate    DateTime
+  createdAt  DateTime           @default(now())
+  updatedAt  DateTime           @updatedAt
+  bookCode   BookCode           @relation(fields: [bookCodeId], references: [id], onDelete: Cascade)
+  user       User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+enum CodeStatus {
+  UNUSED
+  ACTIVE
+  EXPIRED
+}
+
+enum SubscriptionStatus {
+  TRIAL
+  PAID
+  EXPIRED
+  CANCELED
+}
