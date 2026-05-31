@@ -31,6 +31,7 @@ export type SubscriptionMinAggregateOutputType = {
   status: $Enums.SubscriptionStatus | null
   startDate: Date | null
   endDate: Date | null
+  warningSent: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -42,6 +43,7 @@ export type SubscriptionMaxAggregateOutputType = {
   status: $Enums.SubscriptionStatus | null
   startDate: Date | null
   endDate: Date | null
+  warningSent: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -53,6 +55,7 @@ export type SubscriptionCountAggregateOutputType = {
   status: number
   startDate: number
   endDate: number
+  warningSent: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -66,6 +69,7 @@ export type SubscriptionMinAggregateInputType = {
   status?: true
   startDate?: true
   endDate?: true
+  warningSent?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -77,6 +81,7 @@ export type SubscriptionMaxAggregateInputType = {
   status?: true
   startDate?: true
   endDate?: true
+  warningSent?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -88,6 +93,7 @@ export type SubscriptionCountAggregateInputType = {
   status?: true
   startDate?: true
   endDate?: true
+  warningSent?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -172,6 +178,7 @@ export type SubscriptionGroupByOutputType = {
   status: $Enums.SubscriptionStatus
   startDate: Date
   endDate: Date
+  warningSent: boolean
   createdAt: Date
   updatedAt: Date
   _count: SubscriptionCountAggregateOutputType | null
@@ -204,6 +211,7 @@ export type SubscriptionWhereInput = {
   status?: Prisma.EnumSubscriptionStatusFilter<"Subscription"> | $Enums.SubscriptionStatus
   startDate?: Prisma.DateTimeFilter<"Subscription"> | Date | string
   endDate?: Prisma.DateTimeFilter<"Subscription"> | Date | string
+  warningSent?: Prisma.BoolFilter<"Subscription"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Subscription"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Subscription"> | Date | string
   bookCode?: Prisma.XOR<Prisma.BookCodeScalarRelationFilter, Prisma.BookCodeWhereInput>
@@ -217,6 +225,7 @@ export type SubscriptionOrderByWithRelationInput = {
   status?: Prisma.SortOrder
   startDate?: Prisma.SortOrder
   endDate?: Prisma.SortOrder
+  warningSent?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   bookCode?: Prisma.BookCodeOrderByWithRelationInput
@@ -233,6 +242,7 @@ export type SubscriptionWhereUniqueInput = Prisma.AtLeast<{
   status?: Prisma.EnumSubscriptionStatusFilter<"Subscription"> | $Enums.SubscriptionStatus
   startDate?: Prisma.DateTimeFilter<"Subscription"> | Date | string
   endDate?: Prisma.DateTimeFilter<"Subscription"> | Date | string
+  warningSent?: Prisma.BoolFilter<"Subscription"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Subscription"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Subscription"> | Date | string
   bookCode?: Prisma.XOR<Prisma.BookCodeScalarRelationFilter, Prisma.BookCodeWhereInput>
@@ -246,6 +256,7 @@ export type SubscriptionOrderByWithAggregationInput = {
   status?: Prisma.SortOrder
   startDate?: Prisma.SortOrder
   endDate?: Prisma.SortOrder
+  warningSent?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.SubscriptionCountOrderByAggregateInput
@@ -263,6 +274,7 @@ export type SubscriptionScalarWhereWithAggregatesInput = {
   status?: Prisma.EnumSubscriptionStatusWithAggregatesFilter<"Subscription"> | $Enums.SubscriptionStatus
   startDate?: Prisma.DateTimeWithAggregatesFilter<"Subscription"> | Date | string
   endDate?: Prisma.DateTimeWithAggregatesFilter<"Subscription"> | Date | string
+  warningSent?: Prisma.BoolWithAggregatesFilter<"Subscription"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Subscription"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Subscription"> | Date | string
 }
@@ -272,6 +284,7 @@ export type SubscriptionCreateInput = {
   status?: $Enums.SubscriptionStatus
   startDate?: Date | string
   endDate: Date | string
+  warningSent?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   bookCode: Prisma.BookCodeCreateNestedOneWithoutSubscriptionInput
@@ -285,6 +298,7 @@ export type SubscriptionUncheckedCreateInput = {
   status?: $Enums.SubscriptionStatus
   startDate?: Date | string
   endDate: Date | string
+  warningSent?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -294,6 +308,7 @@ export type SubscriptionUpdateInput = {
   status?: Prisma.EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  warningSent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bookCode?: Prisma.BookCodeUpdateOneRequiredWithoutSubscriptionNestedInput
@@ -307,6 +322,7 @@ export type SubscriptionUncheckedUpdateInput = {
   status?: Prisma.EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  warningSent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -318,6 +334,7 @@ export type SubscriptionCreateManyInput = {
   status?: $Enums.SubscriptionStatus
   startDate?: Date | string
   endDate: Date | string
+  warningSent?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -327,6 +344,7 @@ export type SubscriptionUpdateManyMutationInput = {
   status?: Prisma.EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  warningSent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -338,6 +356,7 @@ export type SubscriptionUncheckedUpdateManyInput = {
   status?: Prisma.EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  warningSent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -364,6 +383,7 @@ export type SubscriptionCountOrderByAggregateInput = {
   status?: Prisma.SortOrder
   startDate?: Prisma.SortOrder
   endDate?: Prisma.SortOrder
+  warningSent?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -375,6 +395,7 @@ export type SubscriptionMaxOrderByAggregateInput = {
   status?: Prisma.SortOrder
   startDate?: Prisma.SortOrder
   endDate?: Prisma.SortOrder
+  warningSent?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -386,6 +407,7 @@ export type SubscriptionMinOrderByAggregateInput = {
   status?: Prisma.SortOrder
   startDate?: Prisma.SortOrder
   endDate?: Prisma.SortOrder
+  warningSent?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -468,11 +490,16 @@ export type EnumSubscriptionStatusFieldUpdateOperationsInput = {
   set?: $Enums.SubscriptionStatus
 }
 
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean
+}
+
 export type SubscriptionCreateWithoutUserInput = {
   id?: string
   status?: $Enums.SubscriptionStatus
   startDate?: Date | string
   endDate: Date | string
+  warningSent?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   bookCode: Prisma.BookCodeCreateNestedOneWithoutSubscriptionInput
@@ -484,6 +511,7 @@ export type SubscriptionUncheckedCreateWithoutUserInput = {
   status?: $Enums.SubscriptionStatus
   startDate?: Date | string
   endDate: Date | string
+  warningSent?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -524,6 +552,7 @@ export type SubscriptionScalarWhereInput = {
   status?: Prisma.EnumSubscriptionStatusFilter<"Subscription"> | $Enums.SubscriptionStatus
   startDate?: Prisma.DateTimeFilter<"Subscription"> | Date | string
   endDate?: Prisma.DateTimeFilter<"Subscription"> | Date | string
+  warningSent?: Prisma.BoolFilter<"Subscription"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Subscription"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Subscription"> | Date | string
 }
@@ -533,6 +562,7 @@ export type SubscriptionCreateWithoutBookCodeInput = {
   status?: $Enums.SubscriptionStatus
   startDate?: Date | string
   endDate: Date | string
+  warningSent?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutSubscriptionsInput
@@ -544,6 +574,7 @@ export type SubscriptionUncheckedCreateWithoutBookCodeInput = {
   status?: $Enums.SubscriptionStatus
   startDate?: Date | string
   endDate: Date | string
+  warningSent?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -569,6 +600,7 @@ export type SubscriptionUpdateWithoutBookCodeInput = {
   status?: Prisma.EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  warningSent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutSubscriptionsNestedInput
@@ -580,6 +612,7 @@ export type SubscriptionUncheckedUpdateWithoutBookCodeInput = {
   status?: Prisma.EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  warningSent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -590,6 +623,7 @@ export type SubscriptionCreateManyUserInput = {
   status?: $Enums.SubscriptionStatus
   startDate?: Date | string
   endDate: Date | string
+  warningSent?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -599,6 +633,7 @@ export type SubscriptionUpdateWithoutUserInput = {
   status?: Prisma.EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  warningSent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bookCode?: Prisma.BookCodeUpdateOneRequiredWithoutSubscriptionNestedInput
@@ -610,6 +645,7 @@ export type SubscriptionUncheckedUpdateWithoutUserInput = {
   status?: Prisma.EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  warningSent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -620,6 +656,7 @@ export type SubscriptionUncheckedUpdateManyWithoutUserInput = {
   status?: Prisma.EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  warningSent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -633,6 +670,7 @@ export type SubscriptionSelect<ExtArgs extends runtime.Types.Extensions.Internal
   status?: boolean
   startDate?: boolean
   endDate?: boolean
+  warningSent?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   bookCode?: boolean | Prisma.BookCodeDefaultArgs<ExtArgs>
@@ -646,6 +684,7 @@ export type SubscriptionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   status?: boolean
   startDate?: boolean
   endDate?: boolean
+  warningSent?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   bookCode?: boolean | Prisma.BookCodeDefaultArgs<ExtArgs>
@@ -659,6 +698,7 @@ export type SubscriptionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   status?: boolean
   startDate?: boolean
   endDate?: boolean
+  warningSent?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   bookCode?: boolean | Prisma.BookCodeDefaultArgs<ExtArgs>
@@ -672,11 +712,12 @@ export type SubscriptionSelectScalar = {
   status?: boolean
   startDate?: boolean
   endDate?: boolean
+  warningSent?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type SubscriptionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "bookCodeId" | "status" | "startDate" | "endDate" | "createdAt" | "updatedAt", ExtArgs["result"]["subscription"]>
+export type SubscriptionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "bookCodeId" | "status" | "startDate" | "endDate" | "warningSent" | "createdAt" | "updatedAt", ExtArgs["result"]["subscription"]>
 export type SubscriptionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   bookCode?: boolean | Prisma.BookCodeDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -703,6 +744,7 @@ export type $SubscriptionPayload<ExtArgs extends runtime.Types.Extensions.Intern
     status: $Enums.SubscriptionStatus
     startDate: Date
     endDate: Date
+    warningSent: boolean
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["subscription"]>
@@ -1136,6 +1178,7 @@ export interface SubscriptionFieldRefs {
   readonly status: Prisma.FieldRef<"Subscription", 'SubscriptionStatus'>
   readonly startDate: Prisma.FieldRef<"Subscription", 'DateTime'>
   readonly endDate: Prisma.FieldRef<"Subscription", 'DateTime'>
+  readonly warningSent: Prisma.FieldRef<"Subscription", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Subscription", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Subscription", 'DateTime'>
 }

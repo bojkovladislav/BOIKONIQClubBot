@@ -23,6 +23,8 @@
     },
     "dependencies": {
         "@prisma/client": "^7.8.0",
+        "bree": "^9.2.9",
+        "date-fns": "^4.4.0",
         "fastify": "^5.8.5",
         "grammy": "^1.43.0"
     }
