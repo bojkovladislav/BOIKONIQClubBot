@@ -28,6 +28,9 @@ export const translations = {
         subscription_tier_3: '1 Year ($45)',
         choose_subscription_plan:
             '💎 **Select a subscription tier to continue:**',
+        subscription_tier_1_generating: '💳 3-Month payment link generating...',
+        subscription_tier_2_generating: '💳 6-Month payment link generating...',
+        subscription_tier_3_generating: '💳 1-Year payment link generating...',
     },
     uk: {
         welcome:
@@ -59,6 +62,11 @@ export const translations = {
         subscription_tier_3: '1 Рік ($45)',
         choose_subscription_plan:
             '💎 **Оберіть тарифний план для продовження:**',
+        subscription_tier_1_generating:
+            '💳 Оплата за 3 місяці підключається...',
+        subscription_tier_2_generating:
+            '💳 Оплата за 6 місяців підключається...',
+        subscription_tier_3_generating: '💳 Оплата за 1 рік підключається...',
     },
 };
 

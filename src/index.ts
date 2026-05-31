@@ -15,6 +15,7 @@ const bree = new Bree({
         {
             name: 'expire-users',
             interval: 'at 12:00 am',
+            // interval: '1m', // for dev purposes
             path:
                 process.env['NODE_ENV'] === 'production'
                     ? path.join(__dirname, 'jobs', 'expire-users.js')

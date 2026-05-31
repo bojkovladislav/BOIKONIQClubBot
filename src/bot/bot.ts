@@ -106,6 +106,47 @@ async function processCodeActivation(
     await ctx.reply(translations[lang].success(formattedDate, uniqueLink));
 }
 
+async function getLanguage(userId: number) {
+    let lang: Language = 'en';
+
+    try {
+        const dbUser = await prisma.user.findUnique({
+            where: { telegramId: BigInt(userId) },
+        });
+
+        if (dbUser?.language) {
+            lang = dbUser.language as Language;
+        }
+    } catch (error) {
+        console.error(
+            `Failed to pull database language preferences for user ${userId}:`,
+            error,
+        );
+    }
+
+    return lang;
+}
+
+async function renewSubscription(ctx: Context, lang: Language) {
+    const tierKeyboard = new InlineKeyboard()
+        .text(translations[lang].subscription_tier_1, 'buy_tier_1')
+        .text(translations[lang].subscription_tier_2, 'buy_tier_2')
+        .text(translations[lang].subscription_tier_3, 'buy_tier_3');
+
+    await ctx.reply(translations[lang].choose_subscription_plan, {
+        parse_mode: 'Markdown',
+        reply_markup: tierKeyboard,
+    });
+}
+
+async function handleTierSelection(
+    ctx: Context,
+    lang: Language,
+    tier: '1' | '2' | '3',
+) {
+    await ctx.reply(translations[lang][`subscription_tier_${tier}_generating`]);
+}
+
 bot.command('start', async (ctx) => {
     const keyboard = new InlineKeyboard()
         .text('🇺🇦 Українська', 'set_lang_uk')
@@ -125,46 +166,51 @@ bot.callbackQuery(
 );
 
 bot.callbackQuery('renew_prompt', async (ctx) => {
-    const userId = ctx.from.id;
-
-    let lang: Language = 'en';
-
-    try {
-        const dbUser = await prisma.user.findUnique({
-            where: { telegramId: BigInt(userId) },
-        });
-
-        if (dbUser?.language) {
-            lang = dbUser.language as Language;
-        }
-    } catch (error) {
-        console.error(
-            `Failed to pull database language preferences for user ${userId}:`,
-            error,
-        );
-    }
-
-    const tierKeyboard = new InlineKeyboard()
-        .text(translations[lang].subscription_tier_1, 'buy_tier_1')
-        .text(translations[lang].subscription_tier_2, 'buy_tier_2')
-        .text(translations[lang].subscription_tier_3, 'buy_tier_3');
-
-    await ctx.reply(translations[lang].choose_subscription_plan, {
-        parse_mode: 'Markdown',
-        reply_markup: tierKeyboard,
-    });
-});
-
-bot.on('message:text', async (ctx) => {
-    const userId = ctx.from.id;
-    const lang = userLanguages.get(userId) || 'en';
-    const inputCode = ctx.message.text.trim().toUpperCase();
+    await ctx.answerCallbackQuery();
 
     if (!ctx.from) {
-        await ctx.reply(translations[lang].invalid_user_profile);
+        await ctx.reply(translations['en'].invalid_user_profile);
 
         return;
     }
+
+    const userId = ctx.from.id;
+    const lang = await getLanguage(userId);
+
+    try {
+        await renewSubscription(ctx, lang);
+    } catch (error) {
+        console.error('Could not initiate the renew operation.');
+    }
+});
+
+bot.callbackQuery(/^buy_tier_(\d+)$/, async (ctx) => {
+    await ctx.answerCallbackQuery();
+
+    if (!ctx.from) return;
+
+    const userId = ctx.from.id;
+    const lang = await getLanguage(userId);
+
+    const tier = ctx.match[1] as '1' | '2' | '3';
+
+    try {
+        await handleTierSelection(ctx, lang, tier);
+    } catch (error) {
+        console.error(`Failed to handle tier ${tier} selection:`, error);
+    }
+});
+
+bot.on('message:text', async (ctx) => {
+    if (!ctx.from) {
+        await ctx.reply(translations['en'].invalid_user_profile);
+
+        return;
+    }
+
+    const userId = ctx.from.id;
+    const lang = userLanguages.get(userId) || 'en';
+    const inputCode = ctx.message.text.trim().toUpperCase();
 
     try {
         await processCodeActivation(ctx, inputCode, lang);

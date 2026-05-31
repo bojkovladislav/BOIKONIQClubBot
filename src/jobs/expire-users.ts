@@ -6,6 +6,7 @@ import { translations, type Language } from '../bot/locales';
 function createRenewalKeyboard(lang: Language): InlineKeyboard {
     return new InlineKeyboard().text(
         translations[lang].renew_subscription_button,
+        'renew_prompt',
     );
 }
 
