@@ -1,6 +1,13 @@
+import { InlineKeyboard } from 'grammy';
 import { prisma } from '../../lib/prisma';
 import { bot } from '../bot/bot';
-import { translations } from '../bot/locales';
+import { translations, type Language } from '../bot/locales';
+
+function createRenewalKeyboard(lang: Language): InlineKeyboard {
+    return new InlineKeyboard().text(
+        translations[lang].renew_subscription_button,
+    );
+}
 
 async function kickUserFromChannel(telegramId: string, lang: 'en' | 'uk') {
     try {
@@ -17,7 +24,10 @@ async function kickUserFromChannel(telegramId: string, lang: 'en' | 'uk') {
         await bot.api.sendMessage(
             numericId,
             translations[lang].expired_notification,
-            { parse_mode: 'Markdown' },
+            {
+                parse_mode: 'Markdown',
+                reply_markup: createRenewalKeyboard(lang),
+            },
         );
     } catch (error) {
         console.error(
@@ -54,7 +64,10 @@ async function manageNearlyExpiredSubscriptions() {
                     await bot.api.sendMessage(
                         Number(sub.user.telegramId),
                         translations[userLang].warning_notification,
-                        { parse_mode: 'Markdown' },
+                        {
+                            parse_mode: 'Markdown',
+                            reply_markup: createRenewalKeyboard(userLang),
+                        },
                     );
 
                     await prisma.subscription.update({

@@ -124,6 +124,37 @@ bot.callbackQuery(
     async (ctx) => await handleLanguageSelection(ctx, 'en'),
 );
 
+bot.callbackQuery('renew_prompt', async (ctx) => {
+    const userId = ctx.from.id;
+
+    let lang: Language = 'en';
+
+    try {
+        const dbUser = await prisma.user.findUnique({
+            where: { telegramId: BigInt(userId) },
+        });
+
+        if (dbUser?.language) {
+            lang = dbUser.language as Language;
+        }
+    } catch (error) {
+        console.error(
+            `Failed to pull database language preferences for user ${userId}:`,
+            error,
+        );
+    }
+
+    const tierKeyboard = new InlineKeyboard()
+        .text(translations[lang].subscription_tier_1, 'buy_tier_1')
+        .text(translations[lang].subscription_tier_2, 'buy_tier_2')
+        .text(translations[lang].subscription_tier_3, 'buy_tier_3');
+
+    await ctx.reply(translations[lang].choose_subscription_plan, {
+        parse_mode: 'Markdown',
+        reply_markup: tierKeyboard,
+    });
+});
+
 bot.on('message:text', async (ctx) => {
     const userId = ctx.from.id;
     const lang = userLanguages.get(userId) || 'en';

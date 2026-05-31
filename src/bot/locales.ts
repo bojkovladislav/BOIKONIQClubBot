@@ -22,6 +22,12 @@ export const translations = {
             '⚠️ **Subscription Warning:** Your 6-month trial access to the BOIKONIQ Club will expire in **24 hours**. If you wish to renew your access, please prepare a new activation code!',
         expired_notification:
             '🚫 **Access Expired:** Your 6-month access has officially ended, and you have been removed from the channel. Thank you for being a part of the BOIKONIQ Club! If you obtain a new code, run /start to reactivate.',
+        renew_subscription_button: '🔄 Renew Subscription',
+        subscription_tier_1: '3 Months ($15)',
+        subscription_tier_2: '6 Months ($25)',
+        subscription_tier_3: '1 Year ($45)',
+        choose_subscription_plan:
+            '💎 **Select a subscription tier to continue:**',
     },
     uk: {
         welcome:
@@ -47,6 +53,12 @@ export const translations = {
             '⚠️ **Попередження про підписку:** Ваш 6-місячний пробний доступ до клубу BOIKONIQ закінчується через **24 години**. Якщо ви бажаєте продовжити доступ, будь ласка, підготуйте новий код активації!',
         expired_notification:
             '🚫 **Доступ закінчився:** Термін дії вашого 6-місячного доступу офіційно завершився, і вас було видалено з каналу. Дякуємо, що були з нами в клубу BOIKONIQ! Якщо ви отримаєте новий код, надішліть /start для реактивації.',
+        renew_subscription_button: '🔄 Продовжити підписку',
+        subscription_tier_1: '3 Місяці ($15)',
+        subscription_tier_2: '6 Місяців ($25)',
+        subscription_tier_3: '1 Рік ($45)',
+        choose_subscription_plan:
+            '💎 **Оберіть тарифний план для продовження:**',
     },
 };
 
