@@ -1,6 +1,6 @@
 import { Bot, Context, InlineKeyboard } from 'grammy/web';
-import { prisma } from '../../lib/prisma';
 import { translations, type Language } from './locales';
+import { prisma } from '../../lib/prisma';
 
 const token = process.env['TELEGRAM_BOT_TOKEN'];
 
